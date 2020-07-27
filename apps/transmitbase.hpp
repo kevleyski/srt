@@ -8,14 +8,17 @@
  * 
  */
 
-#ifndef INC__COMMON_TRANMITBASE_HPP
-#define INC__COMMON_TRANMITBASE_HPP
+#ifndef INC_SRT_COMMON_TRANMITBASE_HPP
+#define INC_SRT_COMMON_TRANMITBASE_HPP
 
 #include <string>
 #include <memory>
 #include <vector>
 #include <iostream>
 #include <stdexcept>
+#include "srt.h"
+#include "uriparser.hpp"
+#include "apputil.hpp"
 
 typedef std::vector<char> bytevector;
 extern bool transmit_total_stats;
@@ -24,13 +27,8 @@ extern volatile bool transmit_throw_on_interrupt;
 extern unsigned long transmit_bw_report;
 extern unsigned long transmit_stats_report;
 extern unsigned long transmit_chunk_size;
-enum PrintFormat
-{
-    PRINT_FORMAT_2COLS,
-    PRINT_FORMAT_JSON,
-    PRINT_FORMAT_CSV
-};
-extern PrintFormat printformat;
+
+extern std::shared_ptr<SrtStatsWriter> transmit_stats_writer;
 
 class Location
 {
@@ -57,8 +55,8 @@ public:
         }
     };
 
-    virtual SRTSOCKET GetSRTSocket() { return SRT_INVALID_SOCK; };
-    virtual int GetSysSocket() { return -1; };
+    virtual SRTSOCKET GetSRTSocket() const { return SRT_INVALID_SOCK; };
+    virtual int GetSysSocket() const { return -1; };
     virtual bool AcceptNewClient() { return false; }
 };
 
@@ -73,11 +71,9 @@ public:
     static std::unique_ptr<Target> Create(const std::string& url);
     virtual ~Target() {}
 
-    virtual SRTSOCKET GetSRTSocket() { return SRT_INVALID_SOCK; }
-    virtual int GetSysSocket() { return -1; }
+    virtual SRTSOCKET GetSRTSocket() const { return SRT_INVALID_SOCK; }
+    virtual int GetSysSocket() const { return -1; }
     virtual bool AcceptNewClient() { return false; }
 };
-
-
 
 #endif

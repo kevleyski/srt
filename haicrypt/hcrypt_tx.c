@@ -36,27 +36,18 @@ int HaiCrypt_Tx_GetBuf(HaiCrypt_Handle hhc, size_t data_len, unsigned char **in_
 	hcrypt_Session *crypto = (hcrypt_Session *)hhc;
 
 	ASSERT(NULL != crypto);
-	ASSERT(NULL != crypto->cipher);
+	ASSERT(NULL != crypto->cryspr);
 
 	int pad_factor = (HCRYPT_CTX_MODE_AESECB == crypto->ctx->mode ? 128/8 : 1);
 
-	if (NULL != crypto->cipher->getinbuf) {
-		ASSERT(NULL != crypto->cipher_data);
-		if (0 >= crypto->cipher->getinbuf(crypto->cipher_data, crypto->msg_info->pfx_len, 
-			data_len, pad_factor, in_pp)) {
-			*in_pp = NULL;
-			return(-1);
-		}
-	} else {
 #ifndef _WIN32
-		ASSERT(crypto->inbuf != NULL);
+	ASSERT(crypto->inbuf != NULL);
 #endif
-		size_t in_len = crypto->msg_info->pfx_len + hcryptMsg_PaddedLen(data_len, pad_factor);
-		*in_pp = crypto->inbuf;
-		if (in_len > crypto->inbuf_siz) {
-			*in_pp = NULL;
-			return(-1);
-		}
+	size_t in_len = crypto->msg_info->pfx_len + hcryptMsg_PaddedLen(data_len, pad_factor);
+	*in_pp = crypto->inbuf;
+	if (in_len > crypto->inbuf_siz) {
+		*in_pp = NULL;
+		return(-1);
 	}
 	return(crypto->msg_info->pfx_len);
 }
@@ -64,11 +55,11 @@ int HaiCrypt_Tx_GetBuf(HaiCrypt_Handle hhc, size_t data_len, unsigned char **in_
 int HaiCrypt_Tx_ManageKeys(HaiCrypt_Handle hhc, void *out_p[], size_t out_len_p[], int maxout) 
 {
 	hcrypt_Session *crypto = (hcrypt_Session *)hhc;
-	hcrypt_Ctx *ctx = NULL;
+	hcrypt_Ctx *ctx = crypto->ctx;
 	int nbout = 0;
 
 	if ((NULL == crypto)
-	||  (NULL == (ctx = crypto->ctx))
+	||  (NULL == ctx)
 	||  (NULL == out_p)
 	||  (NULL == out_len_p)) {
 		HCRYPT_LOG(LOG_ERR, "ManageKeys: invalid params: crypto=%p crypto->ctx=%p\n", crypto, ctx);
@@ -78,7 +69,8 @@ int HaiCrypt_Tx_ManageKeys(HaiCrypt_Handle hhc, void *out_p[], size_t out_len_p[
 	/* Manage Key Material (refresh, announce, decommission) */
 	hcryptCtx_Tx_ManageKM(crypto);
 
-	if (NULL == (ctx = crypto->ctx)) {
+	ctx = crypto->ctx;
+	if (NULL == ctx) {
 		HCRYPT_LOG(LOG_ERR, "%s", "crypto context not defined\n");
 		return(-1);
 	}
@@ -91,10 +83,10 @@ int HaiCrypt_Tx_ManageKeys(HaiCrypt_Handle hhc, void *out_p[], size_t out_len_p[
 int HaiCrypt_Tx_GetKeyFlags(HaiCrypt_Handle hhc)
 {
 	hcrypt_Session *crypto = (hcrypt_Session *)hhc;
-	hcrypt_Ctx *ctx = NULL;
+	hcrypt_Ctx *ctx = crypto->ctx;
 
 	if ((NULL == crypto)
-	||  (NULL == (ctx = crypto->ctx))){
+	||  (NULL == ctx)){
 		HCRYPT_LOG(LOG_ERR, "GetKeyFlags: invalid params: crypto=%p crypto->ctx=%p\n", crypto, ctx);
 		return(-1);
 	}
@@ -105,11 +97,11 @@ int HaiCrypt_Tx_Data(HaiCrypt_Handle hhc,
 	unsigned char *in_pfx, unsigned char *in_data, size_t in_len) 
 {
 	hcrypt_Session *crypto = (hcrypt_Session *)hhc;
-	hcrypt_Ctx *ctx = NULL;
+	hcrypt_Ctx *ctx = crypto->ctx;
 	int nbout = 0;
 
 	if ((NULL == crypto)
-	||  (NULL == (ctx = crypto->ctx))){
+	||  (NULL == ctx)){
 		HCRYPT_LOG(LOG_ERR, "Tx_Data: invalid params: crypto=%p crypto->ctx=%p\n", crypto, ctx);
 		return(-1);
 	}
@@ -123,8 +115,8 @@ int HaiCrypt_Tx_Data(HaiCrypt_Handle hhc,
 		indata.payload  = in_data;
 		indata.len      = in_len;
 
-		if (0 > (nbout = crypto->cipher->encrypt(crypto->cipher_data, ctx, &indata, 1, NULL, NULL, NULL))) {
-			HCRYPT_LOG(LOG_ERR, "%s", "encrypt failed\n");
+		if (0 > (nbout = crypto->cryspr->ms_encrypt(crypto->cryspr_cb, ctx, &indata, 1, NULL, NULL, NULL))) {
+			HCRYPT_LOG(LOG_ERR, "%s", "ms_encrypt failed\n");
 			return(nbout);
 		}
 	}
@@ -138,11 +130,11 @@ int HaiCrypt_Tx_Process(HaiCrypt_Handle hhc,
 	void *out_p[], size_t out_len_p[], int maxout)
 {
 	hcrypt_Session *crypto = (hcrypt_Session *)hhc;
-	hcrypt_Ctx *ctx = NULL;
+	hcrypt_Ctx *ctx = crypto->ctx;
 	int nb, nbout = 0;
 
 	if ((NULL == crypto)
-	||  (NULL == (ctx = crypto->ctx))
+	||  (NULL == ctx)
 	||  (NULL == out_p)
 	||  (NULL == out_len_p)) {
 		HCRYPT_LOG(LOG_ERR, "Tx_Process: invalid params: crypto=%p crypto->ctx=%p\n", crypto, ctx);
@@ -152,7 +144,8 @@ int HaiCrypt_Tx_Process(HaiCrypt_Handle hhc,
 	/* Manage Key Material (refresh, announce, decommission) */
 	hcryptCtx_Tx_ManageKM(crypto);
 
-	if (NULL == (ctx = crypto->ctx)) {
+	ctx = crypto->ctx;
+	if (NULL == ctx) {
 		HCRYPT_LOG(LOG_ERR, "%s", "crypto context not defined\n");
 		return(-1);
 	}
@@ -171,8 +164,8 @@ int HaiCrypt_Tx_Process(HaiCrypt_Handle hhc,
 		indata.payload  = &in_msg[ctx->msg_info->pfx_len];
 		indata.len      = in_len - ctx->msg_info->pfx_len;
 
-		if (crypto->cipher->encrypt(crypto->cipher_data, ctx, &indata, 1, &out_p[nbout], &out_len_p[nbout], &nb)) {
-			HCRYPT_LOG(LOG_ERR, "%s", "encrypt failed\n");
+		if (crypto->cryspr->ms_encrypt(crypto->cryspr_cb, ctx, &indata, 1, &out_p[nbout], &out_len_p[nbout], &nb)) {
+			HCRYPT_LOG(LOG_ERR, "%s", "ms_encrypt failed\n");
 			return(nbout);
 		}
 	}
