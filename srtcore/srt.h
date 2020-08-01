@@ -238,7 +238,8 @@ typedef enum SRT_SOCKOPT {
    SRTO_GROUPSTABTIMEO,      // Stability timeout (backup groups) in [us]
    SRTO_GROUPTYPE,           // Group type to which an accepted socket is about to be added, available in the handshake
    // (some space left)
-   SRTO_PACKETFILTER = 60          // Add and configure a packet filter
+   SRTO_PACKETFILTER = 60,   // Add and configure a packet filter
+   SRTO_RETRANSMISSION_ALGORITHM = 61 // An option to select packet retransmission algorithm
 } SRT_SOCKOPT;
 
 
@@ -434,12 +435,14 @@ enum CodeMinor
     MN_REJECTED        =  2,
     MN_NORES           =  3,
     MN_SECURITY        =  4,
+    MN_CLOSED          =  5,
     // MJ_CONNECTION
     MN_CONNLOST        =  1,
     MN_NOCONN          =  2,
     // MJ_SYSTEMRES
     MN_THREAD          =  1,
     MN_MEMORY          =  2,
+    MN_OBJECT          =  3,
     // MJ_FILESYSTEM
     MN_SEEKGFAIL       =  1,
     MN_READFAIL        =  2,
@@ -483,6 +486,7 @@ typedef enum SRT_ERRNO
     SRT_ECONNREJ        = MN(SETUP, REJECTED),
     SRT_ESOCKFAIL       = MN(SETUP, NORES),
     SRT_ESECFAIL        = MN(SETUP, SECURITY),
+    SRT_ESCLOSED        = MN(SETUP, CLOSED),
 
     SRT_ECONNFAIL       = MJ(CONNECTION),
     SRT_ECONNLOST       = MN(CONNECTION, CONNLOST),
@@ -491,6 +495,7 @@ typedef enum SRT_ERRNO
     SRT_ERESOURCE       = MJ(SYSTEMRES),
     SRT_ETHREAD         = MN(SYSTEMRES, THREAD),
     SRT_ENOBUF          = MN(SYSTEMRES, MEMORY),
+    SRT_ESYSOBJ         = MN(SYSTEMRES, OBJECT),
 
     SRT_EFILE           = MJ(FILESYSTEM),
     SRT_EINVRDOFF       = MN(FILESYSTEM, SEEKGFAIL),
