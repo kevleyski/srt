@@ -99,7 +99,7 @@ protected:
     template <class DerivedMedium, class SocketType>
     static Medium* CreateAcceptor(DerivedMedium* self, const sockaddr_any& sa, SocketType sock, size_t chunk)
     {
-        string addr = SockaddrToString(sockaddr_any(sa.get(), sizeof sa));
+        string addr = sockaddr_any(sa.get(), sizeof sa).str();
         DerivedMedium* m = new DerivedMedium(UriParser(self->type() + string("://") + addr), chunk);
         m->m_socket = sock;
         return m;
@@ -115,17 +115,26 @@ public:
         return os.str();
     }
 
-    Medium(UriParser u, size_t ch): m_counter(s_counter++), m_uri(u), m_chunk(ch) {}
+    Medium(const UriParser& u, size_t ch): m_counter(s_counter++), m_uri(u), m_chunk(ch) {}
     Medium(): m_counter(s_counter++) {}
 
     virtual const char* type() = 0;
     virtual bool IsOpen() = 0;
     virtual void CloseInternal() = 0;
 
-    void Close()
+    void CloseState()
     {
         m_open = false;
         m_broken = true;
+    }
+
+    // External API for this class that allows to close
+    // the entity on request. The CloseInternal should
+    // redirect to a type-specific function, the same that
+    // should be also called in destructor.
+    void Close()
+    {
+        CloseState();
         CloseInternal();
     }
     virtual bool End() = 0;
@@ -169,6 +178,7 @@ public:
 
     virtual ~Medium()
     {
+        CloseState();
     }
 
 protected:
@@ -425,7 +435,7 @@ public:
     bool End() override { return m_eof; }
     bool Broken() override { return m_broken; }
 
-    void CloseInternal() override
+    void CloseSrt()
     {
         Verb() << "Closing SRT socket for " << uri();
         lock_guard<mutex> lk(access);
@@ -435,18 +445,23 @@ public:
         m_socket = SRT_ERROR;
     }
 
-    virtual const char* type() override { return "srt"; }
-    virtual int ReadInternal(char* output, int size) override;
-    virtual bool IsErrorAgain() override;
+    // Forwarded in order to separate the implementation from
+    // the virtual function so that virtual function is not
+    // being called in destructor.
+    void CloseInternal() override { return CloseSrt(); }
 
-    virtual void Write(bytevector& portion) override;
-    virtual void CreateListener() override;
-    virtual void CreateCaller() override;
-    virtual unique_ptr<Medium> Accept() override;
-    virtual void Connect() override;
+    const char* type() override { return "srt"; }
+    int ReadInternal(char* output, int size) override;
+    bool IsErrorAgain() override;
+
+    void Write(bytevector& portion) override;
+    void CreateListener() override;
+    void CreateCaller() override;
+    unique_ptr<Medium> Accept() override;
+    void Connect() override;
 
 protected:
-    virtual void Init() override;
+    void Init() override;
 
     void ConfigurePre();
     void ConfigurePost(SRTSOCKET socket);
@@ -458,9 +473,10 @@ protected:
         throw TransmissionError("ERROR: " + text + ": " + ri.getErrorMessage());
     }
 
-    virtual ~SrtMedium() override
+    ~SrtMedium() override
     {
-        Close();
+        CloseState();
+        CloseSrt();
     }
 };
 
@@ -509,7 +525,7 @@ public:
     bool End() override { return m_eof; }
     bool Broken() override { return m_broken; }
 
-    void CloseInternal() override
+    void CloseTcp()
     {
         Verb() << "Closing TCP socket for " << uri();
         lock_guard<mutex> lk(access);
@@ -518,15 +534,16 @@ public:
         tcp_close(m_socket);
         m_socket = -1;
     }
+    void CloseInternal() override { return CloseTcp(); }
 
-    virtual const char* type() override { return "tcp"; }
-    virtual int ReadInternal(char* output, int size) override;
-    virtual bool IsErrorAgain() override;
-    virtual void Write(bytevector& portion) override;
-    virtual void CreateListener() override;
-    virtual void CreateCaller() override;
-    virtual unique_ptr<Medium> Accept() override;
-    virtual void Connect() override;
+    const char* type() override { return "tcp"; }
+    int ReadInternal(char* output, int size) override;
+    bool IsErrorAgain() override;
+    void Write(bytevector& portion) override;
+    void CreateListener() override;
+    void CreateCaller() override;
+    unique_ptr<Medium> Accept() override;
+    void Connect() override;
 
 protected:
 
@@ -552,7 +569,8 @@ protected:
 
     virtual ~TcpMedium()
     {
-        Close();
+        CloseState();
+        CloseTcp();
     }
 };
 
@@ -627,12 +645,13 @@ void TcpMedium::CreateListener()
 {
     int backlog = 5; // hardcoded!
 
-    m_socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-    ConfigurePre();
 
     sockaddr_any sa = CreateAddr(m_uri.host(), m_uri.portno());
 
-    int stat = ::bind(m_socket, sa.get(), sizeof sa);
+    m_socket = socket(sa.get()->sa_family, SOCK_STREAM, IPPROTO_TCP);
+    ConfigurePre();
+
+    int stat = ::bind(m_socket, sa.get(), sa.size());
 
     if (stat == -1)
     {
@@ -674,13 +693,11 @@ unique_ptr<Medium> SrtMedium::Accept()
 unique_ptr<Medium> TcpMedium::Accept()
 {
     sockaddr_any sa;
-    socklen_t salen = sizeof sa;
-    int s = ::accept(m_socket, (sa.get()), (&salen));
+    int s = ::accept(m_socket, (sa.get()), (&sa.syslen()));
     if (s == -1)
     {
         Error(errno, "accept");
     }
-    sa.len = salen;
 
     // Configure 1s timeout
     timeval timeout_1s { 1, 0 };
@@ -731,7 +748,7 @@ void TcpMedium::Connect()
 {
     sockaddr_any sa = CreateAddr(m_uri.host(), m_uri.portno());
 
-    int st = ::connect(m_socket, sa.get(), sizeof sa);
+    int st = ::connect(m_socket, sa.get(), sa.size());
     if (st == -1)
         Error(errno, "connect");
 

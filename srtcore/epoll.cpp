@@ -73,7 +73,7 @@ static ostream& PrintEpollEvent(ostream& os, int events, int et_events = 0);
 
 namespace srt_logging
 {
-    extern Logger dlog, mglog;
+    extern Logger eilog, ealog;
 }
 
 using namespace srt_logging;
@@ -85,6 +85,7 @@ using namespace srt_logging;
 CEPoll::CEPoll():
 m_iIDSeed(0)
 {
+   // Exception -> CUDTUnited ctor.
    setupMutex(m_EPollLock, "EPoll");
 }
 
@@ -115,7 +116,7 @@ ENOMEM: There was insufficient memory to create the kernel object.
        */
    if (localid < 0)
       throw CUDTException(MJ_SETUP, MN_NONE, errno);
-   #elif defined(BSD) || defined(OSX) || (TARGET_OS_IOS == 1) || (TARGET_OS_TV == 1)
+   #elif defined(BSD) || TARGET_OS_MAC
    localid = kqueue();
    if (localid < 0)
       throw CUDTException(MJ_SETUP, MN_NONE, errno);
@@ -155,7 +156,7 @@ void CEPoll::clear_ready_usocks(CEPollDesc& d, int direction)
     if ((direction & ~SRT_EPOLL_EVENTTYPES) != 0)
     {
         // This is internal function, so simply report an IPE on incorrect usage.
-        LOGC(dlog.Error, log << "CEPoll::clear_ready_usocks: IPE, event flags exceed event types: " << direction);
+        LOGC(eilog.Error, log << "CEPoll::clear_ready_usocks: IPE, event flags exceed event types: " << direction);
         return;
     }
     ScopedLock pg (m_EPollLock);
@@ -174,12 +175,12 @@ void CEPoll::clear_ready_usocks(CEPollDesc& d, int direction)
         // have a subscribed event should be deleted from subscriptions.
         if (rs != SRT_INVALID_SOCK)
         {
-            HLOGC(dlog.Debug, log << "CEPoll::clear_ready_usocks: @" << rs << " got all subscription cleared");
+            HLOGC(eilog.Debug, log << "CEPoll::clear_ready_usocks: @" << rs << " got all subscription cleared");
             cleared.push_back(rs);
         }
         else
         {
-            HLOGC(dlog.Debug, log << "CEPoll::clear_ready_usocks: @" << subsock << " is still subscribed");
+            HLOGC(eilog.Debug, log << "CEPoll::clear_ready_usocks: @" << subsock << " is still subscribed");
         }
     }
 
@@ -215,7 +216,7 @@ int CEPoll::add_ssock(const int eid, const SYSSOCKET& s, const int* events)
    ev.data.fd = s;
    if (::epoll_ctl(p->second.m_iLocalID, EPOLL_CTL_ADD, s, &ev) < 0)
       throw CUDTException();
-#elif defined(BSD) || defined(OSX) || (TARGET_OS_IOS == 1) || (TARGET_OS_TV == 1)
+#elif defined(BSD) || TARGET_OS_MAC
    struct kevent ke[2];
    int num = 0;
 
@@ -271,7 +272,7 @@ int CEPoll::remove_ssock(const int eid, const SYSSOCKET& s)
    epoll_event ev;  // ev is ignored, for compatibility with old Linux kernel only.
    if (::epoll_ctl(p->second.m_iLocalID, EPOLL_CTL_DEL, s, &ev) < 0)
       throw CUDTException();
-#elif defined(BSD) || defined(OSX) || (TARGET_OS_IOS == 1) || (TARGET_OS_TV == 1)
+#elif defined(BSD) || TARGET_OS_MAC
    struct kevent ke;
 
    //
@@ -334,12 +335,12 @@ int CEPoll::update_usock(const int eid, const SRTSOCKET& u, const int* events)
 
             // Now it should look exactly like newly added
             // and the state is also updated
-            HLOGC(dlog.Debug, log << "srt_epoll_update_usock: UPDATED E" << eid << " for @" << u << " +" << evd.str());
+            HLOGC(ealog.Debug, log << "srt_epoll_update_usock: UPDATED E" << eid << " for @" << u << " +" << evd.str());
         }
         else
         {
             IF_HEAVY_LOGGING(PrintEpollEvent(evd, evts));
-            HLOGC(dlog.Debug, log << "srt_epoll_update_usock: ADDED E" << eid << " for @" << u << " " << evd.str());
+            HLOGC(ealog.Debug, log << "srt_epoll_update_usock: ADDED E" << eid << " for @" << u << " " << evd.str());
         }
 
         const int newstate = wait.watch & wait.state;
@@ -350,13 +351,13 @@ int CEPoll::update_usock(const int eid, const SRTSOCKET& u, const int* events)
     }
     else if (edgeTriggered)
     {
-        LOGC(dlog.Error, log << "srt_epoll_update_usock: Specified only SRT_EPOLL_ET flag, but no event flag. Error.");
+        LOGC(ealog.Error, log << "srt_epoll_update_usock: Specified only SRT_EPOLL_ET flag, but no event flag. Error.");
         throw CUDTException(MJ_NOTSUP, MN_INVAL);
     }
     else
     {
         // Update with no events means to remove subscription
-        HLOGC(dlog.Debug, log << "srt_epoll_update_usock: REMOVED E" << eid << " socket @" << u);
+        HLOGC(ealog.Debug, log << "srt_epoll_update_usock: REMOVED E" << eid << " socket @" << u);
         d.removeSubscription(u);
     }
     return 0;
@@ -390,7 +391,7 @@ int CEPoll::update_ssock(const int eid, const SYSSOCKET& s, const int* events)
    ev.data.fd = s;
    if (::epoll_ctl(p->second.m_iLocalID, EPOLL_CTL_MOD, s, &ev) < 0)
       throw CUDTException();
-#elif defined(BSD) || defined(OSX) || (TARGET_OS_IOS == 1) || (TARGET_OS_TV == 1)
+#elif defined(BSD) || TARGET_OS_MAC
    struct kevent ke[2];
    int num = 0;
 
@@ -546,7 +547,7 @@ int CEPoll::wait(const int eid, set<SRTSOCKET>* readfds, set<SRTSOCKET>* writefd
             map<int, CEPollDesc>::iterator p = m_mPolls.find(eid);
             if (p == m_mPolls.end())
             {
-                LOGC(mglog.Error, log << "EID:" << eid << " INVALID.");
+                LOGC(ealog.Error, log << "EID:" << eid << " INVALID.");
                 throw CUDTException(MJ_NOTSUP, MN_EIDINVAL);
             }
 
@@ -556,7 +557,7 @@ int CEPoll::wait(const int eid, set<SRTSOCKET>* readfds, set<SRTSOCKET>* writefd
             {
                 // Empty EID is not allowed, report error.
                 //throw CUDTException(MJ_NOTSUP, MN_INVAL);
-                LOGC(mglog.Error, log << "EID:" << eid << " no sockets to check, this would deadlock");
+                LOGC(ealog.Error, log << "EID:" << eid << " no sockets to check, this would deadlock");
                 throw CUDTException(MJ_NOTSUP, MN_EEMPTY, 0);
             }
 
@@ -600,13 +601,14 @@ int CEPoll::wait(const int eid, set<SRTSOCKET>* readfds, set<SRTSOCKET>* writefd
                 }
             }
 
-            HLOGC(mglog.Debug, log << "CEPoll::wait: REPORTED " << total << "/" << total_noticed
+            HLOGC(ealog.Debug, log << "CEPoll::wait: REPORTED " << total << "/" << total_noticed
                     << debug_sockets.str());
 
-            if (lrfds || lwfds)
+            if ((lrfds || lwfds) && !ed.m_sLocals.empty())
             {
 #ifdef LINUX
                 const int max_events = ed.m_sLocals.size();
+                SRT_ASSERT(max_event > 0);
                 epoll_event ev[max_events];
                 int nfds = ::epoll_wait(ed.m_iLocalID, ev, max_events, 0);
 
@@ -624,11 +626,12 @@ int CEPoll::wait(const int eid, set<SRTSOCKET>* readfds, set<SRTSOCKET>* writefd
                         ++ total;
                     }
                 }
-                HLOGC(mglog.Debug, log << "CEPoll::wait: LINUX: picking up " << (total - prev_total)  << " ready fds.");
+                HLOGC(ealog.Debug, log << "CEPoll::wait: LINUX: picking up " << (total - prev_total)  << " ready fds.");
 
-#elif defined(BSD) || defined(OSX) || (TARGET_OS_IOS == 1) || (TARGET_OS_TV == 1)
+#elif defined(BSD) || TARGET_OS_MAC
                 struct timespec tmout = {0, 0};
                 const int max_events = ed.m_sLocals.size();
+                SRT_ASSERT(max_event > 0);
                 struct kevent ke[max_events];
 
                 int nfds = kevent(ed.m_iLocalID, NULL, 0, ke, max_events, &tmout);
@@ -648,7 +651,7 @@ int CEPoll::wait(const int eid, set<SRTSOCKET>* readfds, set<SRTSOCKET>* writefd
                     }
                 }
 
-                HLOGC(mglog.Debug, log << "CEPoll::wait: Darwin/BSD: picking up " << (total - prev_total)  << " ready fds.");
+                HLOGC(ealog.Debug, log << "CEPoll::wait: Darwin/BSD: picking up " << (total - prev_total)  << " ready fds.");
 
 #else
                 //currently "select" is used for all non-Linux platforms.
@@ -693,25 +696,25 @@ int CEPoll::wait(const int eid, set<SRTSOCKET>* readfds, set<SRTSOCKET>* writefd
                     }
                 }
 
-                HLOGC(mglog.Debug, log << "CEPoll::wait: select(otherSYS): picking up " << (total - prev_total)  << " ready fds.");
+                HLOGC(ealog.Debug, log << "CEPoll::wait: select(otherSYS): picking up " << (total - prev_total)  << " ready fds.");
 #endif
             }
 
         } // END-LOCK: m_EPollLock
 
-        HLOGC(mglog.Debug, log << "CEPoll::wait: Total of " << total << " READY SOCKETS");
+        HLOGC(ealog.Debug, log << "CEPoll::wait: Total of " << total << " READY SOCKETS");
 
         if (total > 0)
             return total;
 
         if ((msTimeOut >= 0) && (count_microseconds(srt::sync::steady_clock::now() - entertime) >= msTimeOut * int64_t(1000)))
         {
-            HLOGC(mglog.Debug, log << "EID:" << eid << ": TIMEOUT.");
+            HLOGC(ealog.Debug, log << "EID:" << eid << ": TIMEOUT.");
             throw CUDTException(MJ_AGAIN, MN_XMTIMEOUT, 0);
         }
 
         const bool wait_signaled ATR_UNUSED = CGlobEvent::waitForEvent();
-        HLOGC(mglog.Debug, log << "CEPoll::wait: EVENT WAITING: "
+        HLOGC(ealog.Debug, log << "CEPoll::wait: EVENT WAITING: "
             << (wait_signaled ? "TRIGGERED" : "CHECKPOINT"));
     }
 
@@ -725,7 +728,7 @@ int CEPoll::swait(CEPollDesc& d, map<SRTSOCKET, int>& st, int64_t msTimeOut, boo
         if (!d.flags(SRT_EPOLL_ENABLE_EMPTY) && d.watch_empty() && msTimeOut < 0)
         {
             // no socket is being monitored, this may be a deadlock
-            LOGC(mglog.Error, log << "EID:" << d.m_iID << " no sockets to check, this would deadlock");
+            LOGC(ealog.Error, log << "EID:" << d.m_iID << " no sockets to check, this would deadlock");
             if (report_by_exception)
                 throw CUDTException(MJ_NOTSUP, MN_EEMPTY, 0);
             return -1;
@@ -782,7 +785,7 @@ int CEPoll::swait(CEPollDesc& d, map<SRTSOCKET, int>& st, int64_t msTimeOut, boo
 
                 // Logging into 'singles' because it notifies as to whether
                 // the edge-triggered event has been cleared
-                HLOGC(dlog.Debug, log << "EID " << d.m_iID << " rdy=" << total << ": "
+                HLOGC(ealog.Debug, log << "E" << d.m_iID << " rdy=" << total << ": "
                         << singles.str()
                         << " TRACKED: " << d.DisplayEpollWatch());
                 return total;
@@ -793,7 +796,7 @@ int CEPoll::swait(CEPollDesc& d, map<SRTSOCKET, int>& st, int64_t msTimeOut, boo
 
         if ((msTimeOut >= 0) && ((steady_clock::now() - entertime) >= microseconds_from(msTimeOut * int64_t(1000))))
         {
-            HLOGC(mglog.Debug, log << "EID:" << d.m_iID << ": TIMEOUT.");
+            HLOGC(ealog.Debug, log << "EID:" << d.m_iID << ": TIMEOUT.");
             if (report_by_exception)
                 throw CUDTException(MJ_AGAIN, MN_XMTIMEOUT, 0);
             return 0; // meaning "none is ready"
@@ -816,7 +819,7 @@ int CEPoll::release(const int eid)
    #ifdef LINUX
    // release local/system epoll descriptor
    ::close(i->second.m_iLocalID);
-   #elif defined(BSD) || defined(OSX) || (TARGET_OS_IOS == 1) || (TARGET_OS_TV == 1)
+   #elif defined(BSD) || TARGET_OS_MAC
    ::close(i->second.m_iLocalID);
    #endif
 
@@ -831,10 +834,11 @@ int CEPoll::update_events(const SRTSOCKET& uid, std::set<int>& eids, const int e
     // As event flags no longer contain only event types, check now.
     if ((events & ~SRT_EPOLL_EVENTTYPES) != 0)
     {
-        LOGC(dlog.Fatal, log << "epoll/update: IPE: 'events' parameter shall not contain special flags!");
+        LOGC(eilog.Fatal, log << "epoll/update: IPE: 'events' parameter shall not contain special flags!");
         return -1; // still, ignored.
     }
 
+    int nupdated = 0;
     vector<int> lost;
 
     IF_HEAVY_LOGGING(ostringstream debug);
@@ -847,7 +851,7 @@ int CEPoll::update_events(const SRTSOCKET& uid, std::set<int>& eids, const int e
         map<int, CEPollDesc>::iterator p = m_mPolls.find(*i);
         if (p == m_mPolls.end())
         {
-            HLOGC(dlog.Note, log << "epoll/update: EID " << *i << " was deleted in the meantime");
+            HLOGC(eilog.Note, log << "epoll/update: E" << *i << " was deleted in the meantime");
             // EID invalid, though still present in the socket's subscriber list
             // (dangling in the socket). Postpone to fix the subscruption and continue.
             lost.push_back(*i);
@@ -861,12 +865,12 @@ int CEPoll::update_events(const SRTSOCKET& uid, std::set<int>& eids, const int e
         if (!pwait)
         {
             // As this is mapped in the socket's data, it should be impossible.
-            LOGC(dlog.Error, log << "epoll/update: IPE: update struck EID "
+            LOGC(eilog.Error, log << "epoll/update: IPE: update struck E"
                     << (*i) << " which is NOT SUBSCRIBED to @" << uid);
             continue;
         }
 
-        IF_HEAVY_LOGGING(string tracking = "TRACKING: " + ed.DisplayEpollWatch());
+        IF_HEAVY_LOGGING(string tracking = " TRACKING: " + ed.DisplayEpollWatch());
         // compute new states
 
         // New state to be set into the permanent state
@@ -877,7 +881,7 @@ int CEPoll::update_events(const SRTSOCKET& uid, std::set<int>& eids, const int e
         int changes = pwait->state ^ newstate; // oldState XOR newState
         if (!changes)
         {
-            HLOGC(dlog.Debug, log << debug.str() << ": EID " << (*i)
+            HLOGC(eilog.Debug, log << debug.str() << ": E" << (*i)
                     << tracking << " NOT updated: no changes");
             continue; // no changes!
         }
@@ -887,7 +891,7 @@ int CEPoll::update_events(const SRTSOCKET& uid, std::set<int>& eids, const int e
         changes &= pwait->watch;
         if (!changes)
         {
-            HLOGC(dlog.Debug, log << debug.str() << ": EID " << (*i)
+            HLOGC(eilog.Debug, log << debug.str() << ": E" << (*i)
                     << tracking << " NOT updated: not subscribed");
             continue; // no change watching
         }
@@ -898,15 +902,16 @@ int CEPoll::update_events(const SRTSOCKET& uid, std::set<int>& eids, const int e
         // - if enable, it will set event flags, possibly in a new notice object
         // - if !enable, it will clear event flags, possibly remove notice if resulted in 0
         ed.updateEventNotice(*pwait, uid, events, enable);
+        ++nupdated;
 
-        HLOGC(dlog.Debug, log << debug.str() << ": EID " << (*i)
+        HLOGC(eilog.Debug, log << debug.str() << ": E" << (*i)
                 << " TRACKING: " << ed.DisplayEpollWatch());
     }
 
     for (vector<int>::iterator i = lost.begin(); i != lost.end(); ++ i)
         eids.erase(*i);
 
-    return 0;
+    return nupdated;
 }
 
 // Debug use only.

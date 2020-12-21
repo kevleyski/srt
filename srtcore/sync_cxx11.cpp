@@ -7,14 +7,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  *
  */
+#include "platform_sys.h"
+
 #include <iomanip>
 #include <math.h>
 #include <stdexcept>
 #include "sync.h"
 #include "srt_compat.h"
 #include "common.h"
-
-#ifdef ENABLE_STDCXX_SYNC
 
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -76,4 +76,3 @@ CUDTException& srt::sync::GetThreadLocalError()
     return s_thErr;
 }
 
-#endif // ENABLE_STDCXX_SYNC

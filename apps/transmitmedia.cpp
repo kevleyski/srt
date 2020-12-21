@@ -437,25 +437,28 @@ void SrtCommon::OpenRendezvous(string adapter, string host, int port)
     if ( stat == SRT_ERROR )
         Error("ConfigurePre");
 
+    sockaddr_any sa = CreateAddr(host, port);
+    if (sa.family() == AF_UNSPEC)
+    {
+        Error("OpenRendezvous: invalid target host specification: " + host);
+    }
+
     const int outport = m_outgoing_port ? m_outgoing_port : port;
 
-    sockaddr_any localsa = CreateAddr(adapter, outport);
-	sockaddr* plsa = localsa.get();
+    sockaddr_any localsa = CreateAddr(adapter, outport, sa.family());
 
     Verb() << "Binding a server on " << adapter << ":" << outport;
 
-    stat = srt_bind(m_sock, plsa, sizeof localsa);
+    stat = srt_bind(m_sock, localsa.get(), sizeof localsa);
     if ( stat == SRT_ERROR )
     {
         srt_close(m_sock);
         Error("srt_bind");
     }
 
-    sockaddr_any sa = CreateAddr(host, port);
-	sockaddr* psa = sa.get();
     Verb() << "Connecting to " << host << ":" << port;
 
-    stat = srt_connect(m_sock, psa, sizeof sa);
+    stat = srt_connect(m_sock, sa.get(), sizeof sa);
     if ( stat == SRT_ERROR )
     {
         srt_close(m_sock);
@@ -802,15 +805,21 @@ protected:
 
         bool is_multicast = false;
 
-        if ( attr.count("multicast") )
+        if (attr.count("multicast"))
         {
+            // XXX: Here provide support for IPv6 multicast #1479
+            if (sadr.family() != AF_INET)
+            {
+                throw std::runtime_error("UdpCommon: Multicast on IPv6 is not yet supported");
+            }
+
             if (!IsMulticast(sadr.sin.sin_addr))
             {
                 throw std::runtime_error("UdpCommon: requested multicast for a non-multicast-type IP address");
             }
             is_multicast = true;
         }
-        else if (IsMulticast(sadr.sin.sin_addr))
+        else if (sadr.family() == AF_INET && IsMulticast(sadr.sin.sin_addr))
         {
             is_multicast = true;
         }
@@ -960,7 +969,7 @@ public:
     UdpSource(string host, int port, const map<string,string>& attr)
     {
         Setup(host, port, attr);
-        int stat = ::bind(m_sock, (sockaddr*)&sadr, sizeof sadr);
+        int stat = ::bind(m_sock, sadr.get(), sadr.size());
         if ( stat == -1 )
             Error(SysError(), "Binding address for UDP");
         eof = false;
@@ -971,9 +980,9 @@ public:
         if (pkt.payload.size() < chunk)
             pkt.payload.resize(chunk);
 
-        sockaddr_in sa;
-        socklen_t si = sizeof(sockaddr_in);
-        int stat = recvfrom(m_sock, pkt.payload.data(), (int) chunk, 0, (sockaddr*)&sa, &si);
+        sockaddr_any sa(sadr.family());
+        socklen_t si = sa.size();
+        int stat = recvfrom(m_sock, pkt.payload.data(), (int) chunk, 0, sa.get(), &si);
         if (stat < 1)
         {
             if (SysError() != EWOULDBLOCK)
@@ -981,6 +990,7 @@ public:
             pkt.payload.clear();
             return stat;
         }
+        sa.len = si;
 
         // Save this time to potentially use it for SRT target.
         pkt.time = srt_time_now();
@@ -1002,6 +1012,9 @@ class UdpTarget: public Target, public UdpCommon
 public:
     UdpTarget(string host, int port, const map<string,string>& attr )
     {
+        if (host.empty())
+            cerr << "\nWARN Host for UDP target is not provided. Will send to localhost:" << port << ".\n";
+
         Setup(host, port, attr);
         if (adapter != "")
         {
@@ -1024,7 +1037,7 @@ public:
 
     int Write(const char* data, size_t len, int64_t src_time SRT_ATR_UNUSED,  ostream & ignored SRT_ATR_UNUSED = cout) override
     {
-        int stat = sendto(m_sock, data, (int) len, 0, (sockaddr*)&sadr, sizeof sadr);
+        int stat = sendto(m_sock, data, (int) len, 0, sadr.get(), sadr.size());
         if ( stat == -1 )
         {
             if ((false))

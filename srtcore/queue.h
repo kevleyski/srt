@@ -329,11 +329,7 @@ public:
    void insert(const SRTSOCKET& id, CUDT* u, const sockaddr_any& addr,
                const srt::sync::steady_clock::time_point &ttl);
 
-   // The should_lock parameter is given here to state as to whether
-   // the lock should be applied here. If called from some internals
-   // and the lock IS ALREADY APPLIED, use false here to prevent
-   // double locking and deadlock in result.
-   void remove(const SRTSOCKET& id, bool should_lock);
+   void remove(const SRTSOCKET& id);
    CUDT* retrieve(const sockaddr_any& addr, SRTSOCKET& id);
 
    void updateConnStatus(EReadStatus rst, EConnectStatus, const CPacket& response);
@@ -391,6 +387,10 @@ public:
       /// @return ToS.
 
    int getIpToS() const;
+
+#ifdef SRT_ENABLE_BINDTODEVICE
+   bool getBind(char* dst, size_t len) const;
+#endif
 
    int ioctlQuery(int type) const { return m_pChannel->ioctlQuery(type); }
    int sockoptQuery(int level, int type) const { return m_pChannel->sockoptQuery(level, type); }
@@ -505,7 +505,7 @@ private:
    void removeListener(const CUDT* u);
 
    void registerConnector(const SRTSOCKET& id, CUDT* u, const sockaddr_any& addr, const srt::sync::steady_clock::time_point& ttl);
-   void removeConnector(const SRTSOCKET& id, bool should_lock = true);
+   void removeConnector(const SRTSOCKET& id);
 
    void setNewEntry(CUDT* u);
    bool ifNewEntry();
@@ -541,12 +541,27 @@ struct CMultiplexer
    int m_iIPversion;    // Address family (AF_INET or AF_INET6)
    int m_iIpTTL;
    int m_iIpToS;
+#ifdef SRT_ENABLE_BINDTODEVICE
+   std::string m_BindToDevice;
+#endif
    int m_iMSS;          // Maximum Segment Size
    int m_iRefCount;     // number of UDT instances that are associated with this multiplexer
    int m_iIpV6Only;     // IPV6_V6ONLY option
    bool m_bReusable;    // if this one can be shared with others
 
    int m_iID;           // multiplexer ID
+
+   // Constructor should reset all pointers to NULL
+   // to prevent dangling pointer when checking for memory alloc fails
+   CMultiplexer()
+       : m_pSndQueue(NULL)
+       , m_pRcvQueue(NULL)
+       , m_pChannel(NULL)
+       , m_pTimer(NULL)
+    {
+    }
+
+   void destroy();
 };
 
 #endif
