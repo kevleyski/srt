@@ -1,0 +1,1030 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="SRT"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="clang"/>
+		<Option virtualFolders="CMake Files\;CMake Files\scripts\;CMake Files\haicrypt\;CMake Files\srtcore\;CMake Files\apps\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="srtsupport_virtual">
+				<Option output="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srtsupport_virtual.dir/srtsupport_virtual.objlib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-DSRT_ENABLE_APP_READER"/>
+					<Add option="-DSRT_ENABLE_CLOSE_SYNCH"/>
+					<Add option="-DHAVE_INET_PTON=1"/>
+					<Add option="-DUSE_OPENSSL=1"/>
+					<Add option="-DSRT_ENABLE_ENCRYPTION"/>
+					<Add option="-DENABLE_SOCK_CLOEXEC=1"/>
+					<Add option="-D_GNU_SOURCE"/>
+					<Add option="-DHAI_PATCH=1"/>
+					<Add option="-DHAI_ENABLE_SRT=1"/>
+					<Add option="-DSRT_VERSION=&quot;1.4.2&quot;"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/common"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.3/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 srtsupport_virtual"/>
+					<CompileFile command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="srtsupport_virtual/fast">
+				<Option output="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srtsupport_virtual.dir/srtsupport_virtual.objlib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-DSRT_ENABLE_APP_READER"/>
+					<Add option="-DSRT_ENABLE_CLOSE_SYNCH"/>
+					<Add option="-DHAVE_INET_PTON=1"/>
+					<Add option="-DUSE_OPENSSL=1"/>
+					<Add option="-DSRT_ENABLE_ENCRYPTION"/>
+					<Add option="-DENABLE_SOCK_CLOEXEC=1"/>
+					<Add option="-D_GNU_SOURCE"/>
+					<Add option="-DHAI_PATCH=1"/>
+					<Add option="-DHAI_ENABLE_SRT=1"/>
+					<Add option="-DSRT_VERSION=&quot;1.4.2&quot;"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/common"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.3/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 srtsupport_virtual/fast"/>
+					<CompileFile command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="srt_shared">
+				<Option output="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/libsrt.dylib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-DSRT_ENABLE_APP_READER"/>
+					<Add option="-DSRT_ENABLE_CLOSE_SYNCH"/>
+					<Add option="-DHAVE_INET_PTON=1"/>
+					<Add option="-DUSE_OPENSSL=1"/>
+					<Add option="-DSRT_ENABLE_ENCRYPTION"/>
+					<Add option="-DENABLE_SOCK_CLOEXEC=1"/>
+					<Add option="-D_GNU_SOURCE"/>
+					<Add option="-DHAI_PATCH=1"/>
+					<Add option="-DHAI_ENABLE_SRT=1"/>
+					<Add option="-DSRT_VERSION=&quot;1.4.2&quot;"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/common"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.3/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 srt_shared"/>
+					<CompileFile command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="srt_shared/fast">
+				<Option output="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/libsrt.dylib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-DSRT_ENABLE_APP_READER"/>
+					<Add option="-DSRT_ENABLE_CLOSE_SYNCH"/>
+					<Add option="-DHAVE_INET_PTON=1"/>
+					<Add option="-DUSE_OPENSSL=1"/>
+					<Add option="-DSRT_ENABLE_ENCRYPTION"/>
+					<Add option="-DENABLE_SOCK_CLOEXEC=1"/>
+					<Add option="-D_GNU_SOURCE"/>
+					<Add option="-DHAI_PATCH=1"/>
+					<Add option="-DHAI_ENABLE_SRT=1"/>
+					<Add option="-DSRT_VERSION=&quot;1.4.2&quot;"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/common"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.3/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 srt_shared/fast"/>
+					<CompileFile command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="srt-tunnel">
+				<Option output="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srt-tunnel" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-DSRT_ENABLE_VERBOSE_LOCK"/>
+					<Add option="-DSRT_ENABLE_APP_READER"/>
+					<Add option="-DSRT_ENABLE_CLOSE_SYNCH"/>
+					<Add option="-DHAVE_INET_PTON=1"/>
+					<Add option="-DUSE_OPENSSL=1"/>
+					<Add option="-DSRT_ENABLE_ENCRYPTION"/>
+					<Add option="-DENABLE_SOCK_CLOEXEC=1"/>
+					<Add option="-D_GNU_SOURCE"/>
+					<Add option="-DHAI_PATCH=1"/>
+					<Add option="-DHAI_ENABLE_SRT=1"/>
+					<Add option="-DSRT_VERSION=&quot;1.4.2&quot;"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/common"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/apps"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.3/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 srt-tunnel"/>
+					<CompileFile command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="srt-tunnel/fast">
+				<Option output="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srt-tunnel" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-DSRT_ENABLE_VERBOSE_LOCK"/>
+					<Add option="-DSRT_ENABLE_APP_READER"/>
+					<Add option="-DSRT_ENABLE_CLOSE_SYNCH"/>
+					<Add option="-DHAVE_INET_PTON=1"/>
+					<Add option="-DUSE_OPENSSL=1"/>
+					<Add option="-DSRT_ENABLE_ENCRYPTION"/>
+					<Add option="-DENABLE_SOCK_CLOEXEC=1"/>
+					<Add option="-D_GNU_SOURCE"/>
+					<Add option="-DHAI_PATCH=1"/>
+					<Add option="-DHAI_ENABLE_SRT=1"/>
+					<Add option="-DSRT_VERSION=&quot;1.4.2&quot;"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/common"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/apps"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.3/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 srt-tunnel/fast"/>
+					<CompileFile command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="srt-file-transmit">
+				<Option output="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srt-file-transmit" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-DSRT_ENABLE_APP_READER"/>
+					<Add option="-DSRT_ENABLE_CLOSE_SYNCH"/>
+					<Add option="-DHAVE_INET_PTON=1"/>
+					<Add option="-DUSE_OPENSSL=1"/>
+					<Add option="-DSRT_ENABLE_ENCRYPTION"/>
+					<Add option="-DENABLE_SOCK_CLOEXEC=1"/>
+					<Add option="-D_GNU_SOURCE"/>
+					<Add option="-DHAI_PATCH=1"/>
+					<Add option="-DHAI_ENABLE_SRT=1"/>
+					<Add option="-DSRT_VERSION=&quot;1.4.2&quot;"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/common"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/apps"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.3/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 srt-file-transmit"/>
+					<CompileFile command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="srt-file-transmit/fast">
+				<Option output="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srt-file-transmit" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-DSRT_ENABLE_APP_READER"/>
+					<Add option="-DSRT_ENABLE_CLOSE_SYNCH"/>
+					<Add option="-DHAVE_INET_PTON=1"/>
+					<Add option="-DUSE_OPENSSL=1"/>
+					<Add option="-DSRT_ENABLE_ENCRYPTION"/>
+					<Add option="-DENABLE_SOCK_CLOEXEC=1"/>
+					<Add option="-D_GNU_SOURCE"/>
+					<Add option="-DHAI_PATCH=1"/>
+					<Add option="-DHAI_ENABLE_SRT=1"/>
+					<Add option="-DSRT_VERSION=&quot;1.4.2&quot;"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/common"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/apps"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.3/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 srt-file-transmit/fast"/>
+					<CompileFile command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="srt_virtual">
+				<Option output="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srt_virtual.objlib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-DSRT_EXPORTS"/>
+					<Add option="-DSRT_DYNAMIC"/>
+					<Add option="-DSRT_ENABLE_APP_READER"/>
+					<Add option="-DSRT_ENABLE_CLOSE_SYNCH"/>
+					<Add option="-DHAVE_INET_PTON=1"/>
+					<Add option="-DUSE_OPENSSL=1"/>
+					<Add option="-DSRT_ENABLE_ENCRYPTION"/>
+					<Add option="-DENABLE_SOCK_CLOEXEC=1"/>
+					<Add option="-D_GNU_SOURCE"/>
+					<Add option="-DHAI_PATCH=1"/>
+					<Add option="-DHAI_ENABLE_SRT=1"/>
+					<Add option="-DSRT_VERSION=&quot;1.4.2&quot;"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/common"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.3/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 srt_virtual"/>
+					<CompileFile command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="srt_virtual/fast">
+				<Option output="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srt_virtual.objlib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-DSRT_EXPORTS"/>
+					<Add option="-DSRT_DYNAMIC"/>
+					<Add option="-DSRT_ENABLE_APP_READER"/>
+					<Add option="-DSRT_ENABLE_CLOSE_SYNCH"/>
+					<Add option="-DHAVE_INET_PTON=1"/>
+					<Add option="-DUSE_OPENSSL=1"/>
+					<Add option="-DSRT_ENABLE_ENCRYPTION"/>
+					<Add option="-DENABLE_SOCK_CLOEXEC=1"/>
+					<Add option="-D_GNU_SOURCE"/>
+					<Add option="-DHAI_PATCH=1"/>
+					<Add option="-DHAI_ENABLE_SRT=1"/>
+					<Add option="-DSRT_VERSION=&quot;1.4.2&quot;"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/common"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.3/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 srt_virtual/fast"/>
+					<CompileFile command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="srt-live-transmit">
+				<Option output="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srt-live-transmit" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-DSRT_ENABLE_APP_READER"/>
+					<Add option="-DSRT_ENABLE_CLOSE_SYNCH"/>
+					<Add option="-DHAVE_INET_PTON=1"/>
+					<Add option="-DUSE_OPENSSL=1"/>
+					<Add option="-DSRT_ENABLE_ENCRYPTION"/>
+					<Add option="-DENABLE_SOCK_CLOEXEC=1"/>
+					<Add option="-D_GNU_SOURCE"/>
+					<Add option="-DHAI_PATCH=1"/>
+					<Add option="-DHAI_ENABLE_SRT=1"/>
+					<Add option="-DSRT_VERSION=&quot;1.4.2&quot;"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/common"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/apps"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.3/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 srt-live-transmit"/>
+					<CompileFile command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="srt-live-transmit/fast">
+				<Option output="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srt-live-transmit" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-DSRT_ENABLE_APP_READER"/>
+					<Add option="-DSRT_ENABLE_CLOSE_SYNCH"/>
+					<Add option="-DHAVE_INET_PTON=1"/>
+					<Add option="-DUSE_OPENSSL=1"/>
+					<Add option="-DSRT_ENABLE_ENCRYPTION"/>
+					<Add option="-DENABLE_SOCK_CLOEXEC=1"/>
+					<Add option="-D_GNU_SOURCE"/>
+					<Add option="-DHAI_PATCH=1"/>
+					<Add option="-DHAI_ENABLE_SRT=1"/>
+					<Add option="-DSRT_VERSION=&quot;1.4.2&quot;"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/common"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/apps"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.3/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 srt-live-transmit/fast"/>
+					<CompileFile command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="srt_static">
+				<Option output="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/libsrt.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-DSRT_ENABLE_APP_READER"/>
+					<Add option="-DSRT_ENABLE_CLOSE_SYNCH"/>
+					<Add option="-DHAVE_INET_PTON=1"/>
+					<Add option="-DUSE_OPENSSL=1"/>
+					<Add option="-DSRT_ENABLE_ENCRYPTION"/>
+					<Add option="-DENABLE_SOCK_CLOEXEC=1"/>
+					<Add option="-D_GNU_SOURCE"/>
+					<Add option="-DHAI_PATCH=1"/>
+					<Add option="-DHAI_ENABLE_SRT=1"/>
+					<Add option="-DSRT_VERSION=&quot;1.4.2&quot;"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/common"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.3/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 srt_static"/>
+					<CompileFile command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="srt_static/fast">
+				<Option output="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/libsrt.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-DSRT_ENABLE_APP_READER"/>
+					<Add option="-DSRT_ENABLE_CLOSE_SYNCH"/>
+					<Add option="-DHAVE_INET_PTON=1"/>
+					<Add option="-DUSE_OPENSSL=1"/>
+					<Add option="-DSRT_ENABLE_ENCRYPTION"/>
+					<Add option="-DENABLE_SOCK_CLOEXEC=1"/>
+					<Add option="-D_GNU_SOURCE"/>
+					<Add option="-DHAI_PATCH=1"/>
+					<Add option="-DHAI_ENABLE_SRT=1"/>
+					<Add option="-DSRT_VERSION=&quot;1.4.2&quot;"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/common"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt"/>
+					<Add directory="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.3/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 srt_static/fast"/>
+					<CompileFile command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j12 -f &quot;/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/haicrypt/cryspr-openssl.c.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/haicrypt/cryspr.c.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/haicrypt/haicrypt_log.cpp.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/haicrypt/hcrypt.c.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/haicrypt/hcrypt_ctx_rx.c.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/haicrypt/hcrypt_ctx_tx.c.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/haicrypt/hcrypt_rx.c.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/haicrypt/hcrypt_sa.c.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/haicrypt/hcrypt_tx.c.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/haicrypt/hcrypt_xpt_srt.c.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srtcore/api.cpp.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srtcore/buffer.cpp.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srtcore/cache.cpp.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srtcore/channel.cpp.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srtcore/common.cpp.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srtcore/congctl.cpp.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srtcore/core.cpp.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srtcore/crypto.cpp.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srtcore/epoll.cpp.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srtcore/fec.cpp.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srtcore/handshake.cpp.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srtcore/list.cpp.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srtcore/logger_default.cpp.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srtcore/logger_defs.cpp.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srtcore/md5.cpp.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srtcore/packet.cpp.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srtcore/packetfilter.cpp.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srtcore/queue.cpp.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srtcore/socketconfig.cpp.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srtcore/srt_c_api.cpp.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srtcore/srt_compat.c.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srtcore/strerror_defs.cpp.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srtcore/sync.cpp.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srtcore/sync_posix.cpp.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srt_virtual.dir/srtcore/window.cpp.o">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srtsupport_virtual.dir/apps/apputil.cpp.o">
+			<Option target="srt-tunnel"/>
+			<Option target="srt-file-transmit"/>
+			<Option target="srt-live-transmit"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srtsupport_virtual.dir/apps/logsupport.cpp.o">
+			<Option target="srt-tunnel"/>
+			<Option target="srt-file-transmit"/>
+			<Option target="srt-live-transmit"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srtsupport_virtual.dir/apps/logsupport_appdefs.cpp.o">
+			<Option target="srt-tunnel"/>
+			<Option target="srt-file-transmit"/>
+			<Option target="srt-live-transmit"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srtsupport_virtual.dir/apps/socketoptions.cpp.o">
+			<Option target="srt-tunnel"/>
+			<Option target="srt-file-transmit"/>
+			<Option target="srt-live-transmit"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srtsupport_virtual.dir/apps/transmitmedia.cpp.o">
+			<Option target="srt-tunnel"/>
+			<Option target="srt-file-transmit"/>
+			<Option target="srt-live-transmit"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srtsupport_virtual.dir/apps/uriparser.cpp.o">
+			<Option target="srt-tunnel"/>
+			<Option target="srt-file-transmit"/>
+			<Option target="srt-live-transmit"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeFiles/srtsupport_virtual.dir/apps/verbose.cpp.o">
+			<Option target="srt-tunnel"/>
+			<Option target="srt-file-transmit"/>
+			<Option target="srt-live-transmit"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/apps/apputil.cpp">
+			<Option target="srtsupport_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/apps/apputil.hpp">
+			<Option target="srtsupport_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/apps/logsupport.cpp">
+			<Option target="srtsupport_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/apps/logsupport.hpp">
+			<Option target="srtsupport_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/apps/logsupport_appdefs.cpp">
+			<Option target="srtsupport_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/apps/socketoptions.cpp">
+			<Option target="srtsupport_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/apps/socketoptions.hpp">
+			<Option target="srtsupport_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/apps/srt-file-transmit.cpp">
+			<Option target="srt-file-transmit"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/apps/srt-live-transmit.cpp">
+			<Option target="srt-live-transmit"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/apps/srt-tunnel.cpp">
+			<Option target="srt-tunnel"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/apps/transmitmedia.cpp">
+			<Option target="srtsupport_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/apps/transmitmedia.hpp">
+			<Option target="srtsupport_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/apps/uriparser.cpp">
+			<Option target="srtsupport_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/apps/uriparser.hpp">
+			<Option target="srtsupport_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/apps/verbose.cpp">
+			<Option target="srtsupport_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/apps/verbose.hpp">
+			<Option target="srtsupport_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/cmake_object_lib_support.c">
+			<Option target="srt_shared"/>
+			<Option target="srt_static"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt/cryspr-openssl.c">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt/cryspr-openssl.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt/cryspr.c">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt/cryspr.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt/haicrypt_log.cpp">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt/haicrypt_log.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt/hcrypt.c">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt/hcrypt.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt/hcrypt_ctx_rx.c">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt/hcrypt_ctx_tx.c">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt/hcrypt_rx.c">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt/hcrypt_sa.c">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt/hcrypt_tx.c">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt/hcrypt_xpt_srt.c">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/access_control.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/api.cpp">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/api.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/buffer.cpp">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/buffer.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/cache.cpp">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/cache.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/channel.cpp">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/channel.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/common.cpp">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/common.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/congctl.cpp">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/congctl.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/core.cpp">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/core.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/crypto.cpp">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/crypto.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/epoll.cpp">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/epoll.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/fec.cpp">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/fec.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/handshake.cpp">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/handshake.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/list.cpp">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/list.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/logger_default.cpp">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/logger_defs.cpp">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/logger_defs.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/logging_api.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/md5.cpp">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/md5.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/packet.cpp">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/packet.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/packetfilter.cpp">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/packetfilter.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/platform_sys.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/queue.cpp">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/queue.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/socketconfig.cpp">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/socketconfig.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/srt.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/srt_c_api.cpp">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/srt_compat.c">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/srt_compat.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/strerror_defs.cpp">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/sync.cpp">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/sync.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/sync_posix.cpp">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/udt.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/window.cpp">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/window.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/version.h">
+			<Option target="srt_virtual"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/scripts/haiUtil.cmake">
+			<Option virtualFolder="CMake Files\scripts\"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/scripts/srt.pc.in">
+			<Option virtualFolder="CMake Files\scripts\"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/haicrypt/filelist-openssl.maf">
+			<Option virtualFolder="CMake Files\haicrypt\"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/filelist.maf">
+			<Option virtualFolder="CMake Files\srtcore\"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/srtcore/version.h.in">
+			<Option virtualFolder="CMake Files\srtcore\"/>
+		</Unit>
+		<Unit filename="/Users/kevin.staunton-lambert/workspace/github_kevleyski/srt/apps/support.maf">
+			<Option virtualFolder="CMake Files\apps\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
