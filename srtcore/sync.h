@@ -15,6 +15,7 @@
 //#define ENABLE_CXX17
 
 #include <cstdlib>
+#include <limits>
 #ifdef ENABLE_STDCXX_SYNC
 #include <chrono>
 #include <thread>
@@ -178,21 +179,8 @@ public: // Assignment operators
     inline void operator-=(const Duration<Clock>& rhs) { m_timestamp -= rhs.count(); }
 
 public: //
-#if HAVE_FULL_CXX11
     static inline ATR_CONSTEXPR TimePoint min() { return TimePoint(numeric_limits<uint64_t>::min()); }
     static inline ATR_CONSTEXPR TimePoint max() { return TimePoint(numeric_limits<uint64_t>::max()); }
-#else
-#ifndef UINT64_MAX
-#define UNDEF_UINT64_MAX
-#define UINT64_MAX 0xffffffffffffffffULL
-#endif
-    static inline TimePoint min() { return TimePoint(0); }
-    static inline TimePoint max() { return TimePoint(UINT64_MAX); }
-
-#ifdef UNDEF_UINT64_MAX
-#undef UINT64_MAX
-#endif
-#endif
 
 public:
     Duration<Clock> time_since_epoch() const;
@@ -216,6 +204,11 @@ inline Duration<steady_clock> operator*(const int& lhs, const Duration<steady_cl
 // Duration and timepoint conversions
 //
 ///////////////////////////////////////////////////////////////////////////////
+
+/// Function return number of decimals in a subsecond precision.
+/// E.g. for a microsecond accuracy of steady_clock the return would be 6.
+/// For a nanosecond accuracy of the steady_clock the return value would be 9.
+int clockSubsecondPrecision();
 
 #if ENABLE_STDCXX_SYNC
 
@@ -620,7 +613,7 @@ private:
 
 
 /// Print steady clock timepoint in a human readable way.
-/// days HH:MM::SS.us [STD]
+/// days HH:MM:SS.us [STD]
 /// Example: 1D 02:12:56.123456
 ///
 /// @param [in] steady clock timepoint
@@ -628,7 +621,7 @@ private:
 std::string FormatTime(const steady_clock::time_point& time);
 
 /// Print steady clock timepoint relative to the current system time
-/// Date HH:MM::SS.us [SYS]
+/// Date HH:MM:SS.us [SYS]
 /// @param [in] steady clock timepoint
 /// @returns a string with a formatted time representation
 std::string FormatTimeSys(const steady_clock::time_point& time);

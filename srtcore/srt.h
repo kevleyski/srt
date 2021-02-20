@@ -161,6 +161,10 @@ static const int32_t SRTGROUP_MASK = (1 << 30);
    typedef int SYSSOCKET;
 #endif
 
+#ifndef ENABLE_EXPERIMENTAL_BONDING
+#define ENABLE_EXPERIMENTAL_BONDING 0
+#endif
+
 typedef SYSSOCKET UDPSOCKET;
 
 
@@ -235,14 +239,16 @@ typedef enum SRT_SOCKOPT {
    SRTO_ENFORCEDENCRYPTION,  // Connection to be rejected or quickly broken when one side encryption set or bad password
    SRTO_IPV6ONLY,            // IPV6_V6ONLY mode
    SRTO_PEERIDLETIMEO,       // Peer-idle timeout (max time of silence heard from peer) in [ms]
+   SRTO_BINDTODEVICE,        // Forward the SOL_SOCKET/SO_BINDTODEVICE option on socket (pass packets only from that device)
 #if ENABLE_EXPERIMENTAL_BONDING
    SRTO_GROUPCONNECT,        // Set on a listener to allow group connection
    SRTO_GROUPSTABTIMEO,      // Stability timeout (backup groups) in [us]
    SRTO_GROUPTYPE,           // Group type to which an accepted socket is about to be added, available in the handshake
 #endif
-   SRTO_BINDTODEVICE,        // Forward the SOL_SOCKET/SO_BINDTODEVICE option on socket (pass packets only from that device)
    SRTO_PACKETFILTER = 60,   // Add and configure a packet filter
-   SRTO_RETRANSMITALGO = 61  // An option to select packet retransmission algorithm
+   SRTO_RETRANSMITALGO = 61,  // An option to select packet retransmission algorithm
+
+   SRTO_E_SIZE // Always last element, not a valid option.
 } SRT_SOCKOPT;
 
 
@@ -980,7 +986,7 @@ SRT_API int srt_getsndbuffer(SRTSOCKET sock, size_t* blocks, size_t* bytes);
 SRT_API int srt_getrejectreason(SRTSOCKET sock);
 SRT_API int srt_setrejectreason(SRTSOCKET sock, int value);
 SRT_API extern const char* const srt_rejectreason_msg [];
-const char* srt_rejectreason_str(int id);
+SRT_API const char* srt_rejectreason_str(int id);
 
 SRT_API uint32_t srt_getversion(void);
 

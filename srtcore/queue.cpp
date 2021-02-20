@@ -1024,7 +1024,7 @@ void CRendezvousQueue::updateConnStatus(EReadStatus rst, EConnectStatus cst, con
 
             // This queue is used only in case of Async mode (rendezvous or caller-listener).
             // Synchronous connection requests are handled in startConnect() completely.
-            if (!i->m_pUDT->m_bSynRecving)
+            if (!i->m_pUDT->m_config.m_bSynRecving)
             {
                 IF_HEAVY_LOGGING(++debug_nupd);
 
@@ -1098,7 +1098,15 @@ void CRendezvousQueue::updateConnStatus(EReadStatus rst, EConnectStatus cst, con
     {
         HLOGC(cnlog.Debug, log << "updateConnStatus: COMPLETING dep objects update on failed @" << i->id);
         i->u->m_bConnecting = false;
-        i->u->updateBrokenConnection();
+
+        // DO NOT close the socket here because in this case it might be
+        // unable to get status from at the right moment. Also only member
+        // sockets should be taken care of internally - single sockets should
+        // be normally closed by the application, after it is done with them.
+
+        // app can call any UDT API to learn the connection_broken error
+        CUDT::s_UDTUnited.m_EPoll.update_events(i->u->m_SocketID, i->u->m_sPollID, SRT_EPOLL_IN | SRT_EPOLL_OUT | SRT_EPOLL_ERR, true);
+
         i->u->completeBrokenConnectionDependencies(i->errorcode);
     }
 
@@ -1528,7 +1536,7 @@ EConnectStatus CRcvQueue::worker_TryAsyncRend_OrStore(int32_t id, CUnit* unit, c
 
     // asynchronous connect: call connect here
     // otherwise wait for the UDT socket to retrieve this packet
-    if (!u->m_bSynRecving)
+    if (!u->m_config.m_bSynRecving)
     {
         HLOGC(cnlog.Debug, log << "AsyncOrRND: packet RESOLVED TO @" << id << " -- continuing as ASYNC CONNECT");
         // This is practically same as processConnectResponse, just this applies
