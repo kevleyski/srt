@@ -78,12 +78,17 @@ modified by
    #define NET_ERROR WSAGetLastError()
 #endif
 
-
 #ifdef _DEBUG
 #include <assert.h>
 #define SRT_ASSERT(cond) assert(cond)
 #else
 #define SRT_ASSERT(cond)
+#endif
+
+#if HAVE_FULL_CXX11
+#define SRT_STATIC_ASSERT(cond, msg) static_assert(cond, msg)
+#else
+#define SRT_STATIC_ASSERT(cond, msg)
 #endif
 
 #include <exception>
@@ -279,7 +284,7 @@ enum ETransmissionEvent
 {
     TEV_INIT,       // --> After creation, and after any parameters were updated.
     TEV_ACK,        // --> When handling UMSG_ACK - older CCC:onAck()
-    TEV_ACKACK,     // --> UDT does only RTT sync, can be read from CUDT::RTT().
+    TEV_ACKACK,     // --> UDT does only RTT sync, can be read from CUDT::SRTT().
     TEV_LOSSREPORT, // --> When handling UMSG_LOSSREPORT - older CCC::onLoss()
     TEV_CHECKTIMER, // --> See TEV_CHT_REXMIT
     TEV_SEND,       // --> When the packet is scheduled for sending - older CCC::onPktSent
@@ -306,7 +311,9 @@ enum EInitEvent
     TEV_INIT_OHEADBW
 };
 
-class CPacket;
+namespace srt {
+    class CPacket;
+}
 
 // XXX Use some more standard less hand-crafted solution, if possible
 // XXX Consider creating a mapping between TEV_* values and associated types,
@@ -317,7 +324,7 @@ struct EventVariant
     enum Type {UNDEFINED, PACKET, ARRAY, ACK, STAGE, INIT} type;
     union U
     {
-        const CPacket* packet;
+        const srt::CPacket* packet;
         int32_t ack;
         struct
         {
@@ -336,7 +343,7 @@ struct EventVariant
     // Note: UNDEFINED and ARRAY don't have assignment operator.
     // For ARRAY you'll use 'set' function. For UNDEFINED there's nothing.
 
-    explicit EventVariant(const CPacket* arg)
+    explicit EventVariant(const srt::CPacket* arg)
     {
         type = PACKET;
         u.packet = arg;
@@ -425,7 +432,7 @@ class EventArgType;
 // use a full-templated version. TBD.
 template<> struct EventVariant::VariantFor<EventVariant::PACKET>
 {
-    typedef const CPacket* type;
+    typedef const srt::CPacket* type;
     static type U::*field() {return &U::packet;}
 };
 
@@ -627,12 +634,16 @@ public:
    /// WITH A PRECONDITION that certainly @a seq1 is earlier than @a seq2.
    /// This can also include an enormously large distance between them,
    /// that is, exceeding the m_iSeqNoTH value (can be also used to test
-   /// if this distance is larger). Prior to calling this function the
-   /// caller must be certain that @a seq2 is a sequence coming from a
-   /// later time than @a seq1, and still, of course, this distance didn't
-   /// exceed m_iMaxSeqNo.
+   /// if this distance is larger).
+   /// Prior to calling this function the caller must be certain that
+   /// @a seq2 is a sequence coming from a later time than @a seq1,
+   /// and that the distance does not exceed m_iMaxSeqNo.
    inline static int seqlen(int32_t seq1, int32_t seq2)
-   {return (seq1 <= seq2) ? (seq2 - seq1 + 1) : (seq2 - seq1 + m_iMaxSeqNo + 2);}
+   {
+       SRT_ASSERT(seq1 >= 0 && seq1 <= m_iMaxSeqNo);
+       SRT_ASSERT(seq2 >= 0 && seq2 <= m_iMaxSeqNo);
+       return (seq1 <= seq2) ? (seq2 - seq1 + 1) : (seq2 - seq1 + m_iMaxSeqNo + 2);
+   }
 
    /// This behaves like seq2 - seq1, with the precondition that the true
    /// distance between two sequence numbers never exceeds m_iSeqNoTH.
@@ -1401,7 +1412,7 @@ inline std::string SrtVersionString(int version)
     return buf;
 }
 
-bool SrtParseConfig(std::string s, SrtConfig& w_config);
+bool SrtParseConfig(std::string s, srt::SrtConfig& w_config);
 
 struct PacketMetric
 {

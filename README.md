@@ -33,25 +33,27 @@ As audio/video packets are streamed from a source to a destination device, SRT d
 
 ### Guides
 
-* [Why SRT Was Created](docs/why-srt-was-created.md)
-* [SRT Protocol Technical Overview](https://github.com/Haivision/srt/files/2489142/SRT_Protocol_TechnicalOverview_DRAFT_2018-10-17.pdf)
-* SRT Cookbook: [website](https://srtlab.github.io/srt-cookbook), [GitHub](https://github.com/SRTLab/srt-cookbook)
-* SRT RFC: [txt](https://haivision.github.io/srt-rfc/draft-sharabayko-mops-srt.txt), [html](https://haivision.github.io/srt-rfc/draft-sharabayko-mops-srt.html), [GitHub](https://github.com/Haivision/srt-rfc)
-* [Using the `srt-live-transmit` App](docs/srt-live-transmit.md)
+* [SRT API Documents](docs/API/)
+* [Using the `srt-live-transmit` App](docs/apps/srt-live-transmit.md)
+* [SRT Developer's Guide](docs/dev/developers-guide.md)
 * [Contributing](CONTRIBUTING.md)
-* [Developer's Guide](docs/DevelopersGuide.md)
-* [SRT Encryption](docs/encryption.md)
-* [API](docs/API.md)
-* [Reporting problems](docs/reporting.md)
+* [Reporting Issues](docs/dev/making-srt-better.md)
+* SRT RFC: [Latest IETF Draft](https://datatracker.ietf.org/doc/html/draft-sharabayko-srt-00), [Latest Working Copy](https://haivision.github.io/srt-rfc/draft-sharabayko-srt.html), [GitHub Repo](https://github.com/Haivision/srt-rfc)
+* SRT CookBook: [Website](https://srtlab.github.io/srt-cookbook), [GitHub Repo](https://github.com/SRTLab/srt-cookbook)
+* [SRT Protocol Technical Overview](https://github.com/Haivision/srt/files/2489142/SRT_Protocol_TechnicalOverview_DRAFT_2018-10-17.pdf)
+* [Why SRT Was Created](docs/misc/why-srt-was-created.md)
 
 ## Requirements
 
-* cmake (as build system)
-* Tcl 8.5 (optional for user-friendly build system)
-* OpenSSL
-* Pthreads (for POSIX systems it's builtin, for Windows there's a library)
+* C++03 (or above) compliant compiler.
+* CMake 2.8.12 or above (as build system).
+* OpenSSL 1.1 (to enable encryption, or build with `-DENABLE_ENCRYPTION=OFF`).
+* Multithreading is provided by either of the following:
+  * C++11: standard library (`std` by `-DENABLE_STDCXX_SYNC=ON` CMake option);
+  * C++03: Pthreads (for POSIX systems it's built in, for Windows there is a ported library).
+* Tcl 8.5 (optional, used by `./configure` script or use CMake directly).
 
-For detailed description of the build system and options, please read [BuildOptions.md](docs/BuildOptions.md).
+For a detailed description of the build system and options, please refer to [SRT Build Options](docs/build/build-options.md).
 
 ### Build on Linux
 
@@ -128,7 +130,7 @@ make
 
 ### Build on Windows
 
-Follow the [Windows build instructions](docs/build-win.md).
+Follow the [Building SRT for Windows](docs/build/build-win.md) instructions.
 
 [appveyor-badge]: https://img.shields.io/appveyor/ci/Haivision/srt/master.svg?label=Windows
 [appveyor]: https://ci.appveyor.com/project/Haivision/srt
